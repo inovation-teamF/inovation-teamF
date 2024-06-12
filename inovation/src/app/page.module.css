@@ -1,3 +1,24 @@
+.startButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.startButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.startButton:hover {
+  background-color: #005bb5;
+}
+
+
 .main {
   display: flex;
   flex-direction: column;
