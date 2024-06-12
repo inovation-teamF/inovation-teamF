@@ -2,7 +2,8 @@
 'use client';
 import './play.css';
 
-export default function Play() {
+
+export default function Play({ distance }) {
   const handleChangeShop = () => {
     window.location.href = 'http://localhost:3000/';
   };
@@ -13,7 +14,7 @@ export default function Play() {
 
   return (
     <main className="main">
-      <h1 className="heading">Welcome to the Play Page</h1>
+      <h1 className="distance">Remaining Distance: {distance} km</h1>
       <p className="paragraph">This is the content of the Play page.</p>
       <div className="buttons">
         <button className="button" onClick={handleChangeShop}>ほかの店にする</button>

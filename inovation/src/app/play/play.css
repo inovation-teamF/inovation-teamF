@@ -8,12 +8,20 @@
   background-color: #f0f0f0;
 }
 
-.heading {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
 
 .paragraph {
   font-size: 1.25rem;
   color: #333;
+}
+.distance {
+  font-size: 1.5rem;
+  color: #008000; /* 例として色を変更 */
+  margin-top: 1rem;
+  padding: 10px 20px;
+  border: 2px solid #000; /* 枠線の追加 */
+  border-radius: 5px; /* 角を丸くする */
+  background-color: #fff; /* 背景色 */
+  display: inline-block;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
 }
