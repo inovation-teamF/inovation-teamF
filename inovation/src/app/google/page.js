@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const [shops, setShops] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchShops = async () => {
-      const location = '35.6895,139.6917'; // Tokyo coordinates
+    const fetchShops = async (location) => {
       const radius = 1500; // 1.5 km
       const type = 'store';
 
@@ -19,15 +19,40 @@ export default function Home() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching shops:', error);
+        setError('Failed to fetch shops');
         setLoading(false);
       }
     };
 
-    fetchShops();
+    const getCurrentLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            const location = `${latitude},${longitude}`;
+            fetchShops(location);
+          },
+          (error) => {
+            console.error('Error getting current location:', error);
+            setError('Failed to get current location');
+            setLoading(false);
+          }
+        );
+      } else {
+        setError('Geolocation is not supported by this browser');
+        setLoading(false);
+      }
+    };
+
+    getCurrentLocation();
   }, []);
 
   if (loading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   return (
