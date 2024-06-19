@@ -1,0 +1,63 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+
+.paragraph {
+  font-size: 1.25rem;
+  color: #333;
+}
+.distance {
+  font-size: 1.5rem;
+  color: #008000; /* 例として色を変更 */
+  margin-top: 1rem;
+  padding: 10px 20px;
+  border: 2px solid #000; /* 枠線の追加 */
+  border-radius: 5px; /* 角を丸くする */
+  background-color: #fff; /* 背景色 */
+  display: inline-block;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.compass-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.compass {
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: relative;
+}
+
+.compass-needle {
+  width: 2px;
+  height: 50px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform-origin: bottom;
+  transition: transform 0.3s ease-in-out;
+}
