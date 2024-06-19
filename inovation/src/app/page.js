@@ -79,7 +79,6 @@ export default function Home() {
               onClick={() => setGenre('全')}
             >
               ALL
-          
             </button>
           </div>
 
@@ -102,5 +101,3 @@ export default function Home() {
     </div>
   );
 }
-
-export default First;
