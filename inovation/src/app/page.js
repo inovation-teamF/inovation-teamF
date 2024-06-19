@@ -1,92 +1,105 @@
-import Link from "next/link";
-import Image from "next/image";
-import styles from './page.module.css'; // ファイル構造に応じてインポートを調整してください
+"use client";
 
-function First() {
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Head from 'next/head';
+import styles from './stylesheet/home.module.css'; // モジュールCSSとしてインポート
+
+export default function Home() {
+  const [distance, setDistance] = useState('');
+  const [genre, setGenre] = useState('');
+  const router = useRouter();
+
+  const handleStart = () => {
+    router.push(`/results?distance=${distance}&genre=${genre}`);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Nomad Eats&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
+    <div className={styles.container}>
+      <Head>
+        <title>Nomad Eats</title>
+        <meta name="description" content="Find the best nomad-friendly food around you" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className={styles.main}>
+        <h1 className={styles.title}>
+          Welcome to <a href="#">Nomad Eats!</a>
+        </h1>
+
+        <p className={styles.description}>
+          ～距離とジャンルを選択してノマドな小旅行を～
         </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+
+        <div className={styles.selectionSection}>
+          <h2>距離を選択</h2>
+          <div className={styles.distanceSelection}>
+            <button
+              className={`${styles.button} ${distance === '1' ? styles.selected : ''}`}
+              onClick={() => setDistance('1')}
+            >
+              近距離(~1km)
+            </button>
+            <button
+              className={`${styles.button} ${distance === '2' ? styles.selected : ''}`}
+              onClick={() => setDistance('2')}
+            >
+              中距離(1~3km)
+            </button>
+            <button
+              className={`${styles.button} ${distance === '3' ? styles.selected : ''}`}
+              onClick={() => setDistance('3')}
+            >
+              遠距離(3~5km)
+            </button>
+          </div>
+
+          <h2>ジャンルを選択</h2>
+          <div className={styles.genreSelection}>
+            <button
+              className={`${styles.button} ${genre === '4' ? styles.selected : ''}`}
+              onClick={() => setGenre('4')}
+            >
+              和食
+            </button>
+            <button
+              className={`${styles.button} ${genre === '5' ? styles.selected : ''}`}
+              onClick={() => setGenre('5')}
+            >
+              洋食
+            </button>
+            <button
+              className={`${styles.button} ${genre === '6' ? styles.selected : ''}`}
+              onClick={() => setGenre('6')}
+            >
+              中華
+            </button>
+            <button
+              className={`${styles.button} ${genre === '全' ? styles.selected : ''}`}
+              onClick={() => setGenre('全')}
+            >
+              ALL
+          
+            </button>
+          </div>
+
+          <button className={styles.startButton} onClick={handleStart}>START</button>
         </div>
-      </div>
+      </main>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <Link href="/play" className={styles.card}>
-          <h2>
-            スタート <span>-&gt;</span>
-          </h2>
-          <p>Next.jsの機能とAPIに関する詳細情報を見つけてください。</p>
-        </Link>
-
+      <footer className={styles.footer}>
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
+          href="https://yourcompany.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h2>
-            学ぶ <span>-&gt;</span>
-          </h2>
-          <p>クイズ付きのインタラクティブなコースでNext.jsについて学びましょう！</p>
+          Powered by{' '}
+          <span className={styles.logo}>
+            inovation team F
+          </span>
         </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            テンプレート <span>-&gt;</span>
-          </h2>
-          <p>Next.js用のスターターテンプレートを探しましょう。</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            デプロイ <span>-&gt;</span>
-          </h2>
-          <p>
-            Vercelで共有可能なURLにNext.jsサイトを即座にデプロイしましょう。
-          </p>
-        </a>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }
 
