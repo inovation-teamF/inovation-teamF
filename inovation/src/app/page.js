@@ -41,7 +41,7 @@ export default function Home() {
 
       <div className={styles.grid}>
         <a
-          href="http://localhost:3000/play"
+          href="http://localhost:3000/compass"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"

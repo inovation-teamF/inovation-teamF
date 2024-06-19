@@ -18,18 +18,30 @@ export default function Play({ distance, angle }) {
     }
   }, [angle]);
 
+  useEffect(() => {
+    if (distance * 1000 <= 20) { // 20m以内になったらゴールページに遷移
+      window.location.href = 'http://localhost:3000/result';
+    }
+  }, [distance]);
+
+  const formatDistance = (distance) => {
+    if (distance < 1) {
+      return `${Math.round(distance * 1000)} m`;
+    }
+    return `${distance} km`;
+  };
+
   return (
     <main className="main">
-      <h1 className="distance">Remaining Distance: {distance} km</h1>
+      <h1 className="distance">Remaining Distance: {formatDistance(distance)}</h1>
       <div className="compass-container">
         <div className="compass">
           <div id="compass-needle" className="compass-needle"></div>
         </div>
       </div>
-      <p className="paragraph">This is the content of the Play page.</p>
       <div className="buttons">
-        <button className="button" onClick={handleChangeShop}>ほかの店にする</button>
-        <button className="button" onClick={handleGoal}>ゴール！</button>
+        <button className="button1" onClick={handleChangeShop}>ほかの店にする</button>
+        <button className="button2" onClick={handleGoal}>ゴール！</button>
       </div>
     </main>
   );

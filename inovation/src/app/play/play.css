@@ -24,16 +24,25 @@
   display: inline-block;
   text-align: center;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  margin-bottom: 100px; /* コンパスとの間に空白を追加 */
 }
 .buttons {
   display: flex;
   gap: 10px;
 }
 
-.button {
+.button1 {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  margin-right: 100px;
+}
+
+.button2 {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .compass-container {
@@ -44,16 +53,16 @@
 }
 
 .compass {
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   border: 2px solid black;
   border-radius: 50%;
   position: relative;
 }
 
 .compass-needle {
-  width: 2px;
-  height: 50px;
+  width: 4px;
+  height: 150px;
   background-color: red;
   position: absolute;
   top: 0;
