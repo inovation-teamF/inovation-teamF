@@ -46,6 +46,8 @@ export default function Results() {
       if (data.length > 0) {
         const randomShop = data[Math.floor(Math.random() * data.length)];
         console.log(`Randomly selected shop: ${randomShop.name}`); // 店の名前を出力
+        console.log(`Randomly selected shop location: ${randomShop.geometry.location.lat}, ${randomShop.geometry.location.lng}`);
+        console.log(`Current location: ${location}`);
         setShop(randomShop);
 
         if (userLocation && randomShop.geometry && randomShop.geometry.location) {
