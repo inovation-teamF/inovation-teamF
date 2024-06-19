@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import styles from './page.module.css'; // ファイル構造に応じてインポートを調整してください
 
 function First() {
   return (
@@ -39,17 +41,12 @@ function First() {
       </div>
 
       <div className={styles.grid}>
-        <a
-          href="http://localhost:3000/play"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="/play" className={styles.card}>
           <h2>
-            start <span>-&gt;</span>
+            スタート <span>-&gt;</span>
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          <p>Next.jsの機能とAPIに関する詳細情報を見つけてください。</p>
+        </Link>
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -58,9 +55,9 @@ function First() {
           rel="noopener noreferrer"
         >
           <h2>
-            Learn <span>-&gt;</span>
+            学ぶ <span>-&gt;</span>
           </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
+          <p>クイズ付きのインタラクティブなコースでNext.jsについて学びましょう！</p>
         </a>
 
         <a
@@ -70,9 +67,9 @@ function First() {
           rel="noopener noreferrer"
         >
           <h2>
-            Templates <span>-&gt;</span>
+            テンプレート <span>-&gt;</span>
           </h2>
-          <p>Explore starter templates for Next.js.</p>
+          <p>Next.js用のスターターテンプレートを探しましょう。</p>
         </a>
 
         <a
@@ -82,10 +79,10 @@ function First() {
           rel="noopener noreferrer"
         >
           <h2>
-            Deploy <span>-&gt;</span>
+            デプロイ <span>-&gt;</span>
           </h2>
           <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            Vercelで共有可能なURLにNext.jsサイトを即座にデプロイしましょう。
           </p>
         </a>
       </div>
