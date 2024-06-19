@@ -3,10 +3,12 @@ import axios from 'axios';
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const location = searchParams.get('location');
-  const radius = searchParams.get('radius');
-  const type = searchParams.get('type');
+  const radius = searchParams.get('radius') || 1500; // デフォルトは1.5km
+  const type = searchParams.get('type') || 'store'; // デフォルトは店舗
+  const keyword = searchParams.get('keyword') || ''; // キーワード（ジャンルなど）
+
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
-  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=${type}&key=${API_KEY}`;
+  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=${type}&keyword=${keyword}&key=${API_KEY}`;
 
   try {
     const response = await axios.get(url);
@@ -15,4 +17,3 @@ export async function GET(req) {
     return new Response(JSON.stringify({ error: 'Failed to fetch places data' }), { status: 500 });
   }
 }
-
