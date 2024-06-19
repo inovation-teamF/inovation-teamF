@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 export default function Home() {
   const [shop, setShop] = useState(null);
@@ -15,7 +14,7 @@ export default function Home() {
 
   const fetchRandomShop = async (location, radius, type, keyword) => {
     try {
-      let url = `/api/places?location=${location}&radius=${radius}&type=${type}&keyword=${keyword === 'random' ? '' : keyword}`;
+      const url = `/api/places?location=${location}&radius=${radius}&type=${type}&keyword=${keyword === 'random' ? '' : keyword}`;
       const res = await fetch(url);
       const data = await res.json();
 
@@ -24,7 +23,9 @@ export default function Home() {
         setShop(randomShop);
 
         if (userLocation && randomShop.geometry && randomShop.geometry.location) {
-          calculateDistanceAndBearing(userLocation, randomShop.geometry.location);
+          const { distance, bearing } = calculateDistanceAndBearing(userLocation, randomShop.geometry.location);
+          setDistance(distance);
+          setBearing(bearing);
         } else {
           setError('Failed to calculate distance and bearing: Location data missing');
         }
@@ -66,7 +67,7 @@ export default function Home() {
       const { latitude: lat1, longitude: lon1 } = userLoc;
       const { lat: lat2, lng: lon2 } = shopLoc;
 
-      const R = 6371;
+      const R = 6371; // Radius of the Earth in kilometers
       const dLat = (lat2 - lat1) * Math.PI / 180;
       const dLon = (lon2 - lon1) * Math.PI / 180;
       const a =
@@ -81,11 +82,11 @@ export default function Home() {
                                Math.sin(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.cos(dLon));
       bearing = (bearing * 180 / Math.PI + 360) % 360;
 
-      setDistance(distance.toFixed(2));
-      setBearing(bearing.toFixed(2));
+      return { distance: distance.toFixed(2), bearing: bearing.toFixed(2) };
     } catch (error) {
       console.error('Error calculating distance and bearing:', error);
       setError('Failed to calculate distance and bearing');
+      return { distance: null, bearing: null };
     }
   };
 
@@ -118,48 +119,35 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Random Nearby Shop</h1>
-      <div>
-        <label htmlFor="genre">Genre:</label>
-        <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
-          <option value="random">Random</option>
-          <option value="restaurant">Japanese (和食)</option>
-          <option value="chinese">Chinese (中華)</option>
-          <option value="western">Western (洋食)</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="distance">Distance (meters):</label>
-        <input type="number" id="distance" value={selectedDistance} onChange={handleDistanceChange} />
-      </div>
-      {shop ? (
-        <div key={shop.place_id}>
+      <h1>Random Shop Finder</h1>
+      {shop && (
+        <>
           <h2>{shop.name}</h2>
           <p>{shop.vicinity}</p>
-          {userLocation ? (
-            <p>
-              Distance: {distance} km, Bearing: {bearing}° from your location
-            </p>
-          ) : (
-            <p>Loading user location...</p>
-          )}
-          <Link
-            href={{
-              pathname: '/shopDetails',
-              query: {
-                name: shop.name,
-                vicinity: shop.vicinity,
-                distance,
-                bearing,
-              },
-            }}
-          >
-            Go to Shop Details
-          </Link>
-        </div>
-      ) : (
-        <p>No shop found</p>
+          <p>Distance: {distance} km</p>
+          <p>Bearing: {bearing}°</p>
+        </>
       )}
+      <div>
+        <label>
+          Genre:
+          <select value={selectedGenre} onChange={handleGenreChange}>
+            <option value="random">Random</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="cafe">Cafe</option>
+            <option value="bar">Bar</option>
+          </select>
+        </label>
+        <label>
+          Distance:
+          <input
+            type="number"
+            value={selectedDistance}
+            onChange={handleDistanceChange}
+          />
+        </label>
+      </div>
     </div>
   );
 }
+
