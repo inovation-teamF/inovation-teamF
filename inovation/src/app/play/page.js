@@ -1,9 +1,8 @@
-// src/app/play.js
 'use client';
 import './play.css';
+import { useEffect } from 'react';
 
-
-export default function Play({ distance }) {
+export default function Play({ distance, angle }) {
   const handleChangeShop = () => {
     window.location.href = 'http://localhost:3000/';
   };
@@ -12,9 +11,21 @@ export default function Play({ distance }) {
     window.location.href = 'http://localhost:3000/result';
   };
 
+  useEffect(() => {
+    const compassNeedle = document.getElementById('compass-needle');
+    if (compassNeedle) {
+      compassNeedle.style.transform = `rotate(${angle}deg)`;
+    }
+  }, [angle]);
+
   return (
     <main className="main">
       <h1 className="distance">Remaining Distance: {distance} km</h1>
+      <div className="compass-container">
+        <div className="compass">
+          <div id="compass-needle" className="compass-needle"></div>
+        </div>
+      </div>
       <p className="paragraph">This is the content of the Play page.</p>
       <div className="buttons">
         <button className="button" onClick={handleChangeShop}>ほかの店にする</button>
