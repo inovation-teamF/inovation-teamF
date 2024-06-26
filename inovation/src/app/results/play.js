@@ -1,14 +1,19 @@
 'use client';
 import './play.css';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function Play({ distance, angle }) {
+export default function Play({ distance, angle, shop }) {
+  const router = useRouter();
+
   const handleChangeShop = () => {
     window.location.href = '/';
   };
 
   const handleGoal = () => {
-    window.location.href = '/result';
+    if (shop) {
+      router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
+    }
   };
 
   // コンパスの針を回転させる処理
@@ -23,11 +28,11 @@ export default function Play({ distance, angle }) {
   useEffect(() => {
     if (distance !== null) {
       const distanceInMeters = distance * 1000; // 距離をメートル単位に変換
-      if (distanceInMeters <= 20) {
-        router.push(`/result?shopName=${encodeURIComponent(randomShop.name)}`);
+      if (distanceInMeters <= 20 && shop) {
+        router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
       }
     }
-  }, [distance]);
+  }, [distance, shop, router]);
 
   // 距離のフォーマットを切り替える関数
   const formatDistance = () => {

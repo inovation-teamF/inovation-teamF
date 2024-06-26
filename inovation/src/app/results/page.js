@@ -66,7 +66,7 @@ function ResultsComponent() {
       setError('Failed to fetch shops');
       setLoading(false);
     }
-  }, [userLocation, router]);
+  }, [userLocation]);
 
   const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
@@ -152,6 +152,12 @@ function ResultsComponent() {
     };
   }, []);
 
+  const handleGoToResult = () => {
+    if (shop) {
+      router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -170,8 +176,9 @@ function ResultsComponent() {
 
       <main className={styles.main}>
         <div>
-          <Play distance={calculatedDistance} angle={bearing} />
+          <Play distance={calculatedDistance} angle={bearing} shop={shop} />
         </div>
+        <button onClick={handleGoToResult}>この店に行く</button>
         <button onClick={getCurrentLocation}>Update Location</button>
       </main>
 
