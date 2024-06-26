@@ -178,7 +178,6 @@ function ResultsComponent() {
         <div>
           <Play distance={calculatedDistance} angle={bearing} shop={shop} />
         </div>
-        <button onClick={handleGoToResult}>この店に行く</button>
         <button onClick={getCurrentLocation}>Update Location</button>
       </main>
 
