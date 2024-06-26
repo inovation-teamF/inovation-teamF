@@ -16,7 +16,7 @@ function ResultComponent() {
       <h1 className="heading">ゴール！！</h1>
       <p className="paragraph">あなたは{shopName ? `"${shopName}"` : '店名'}に到着しました！！</p>
       <div className="buttons">
-        <button className="button" onClick={handleChangeShop}>ほかの店を探す</button>
+        <button className="button2" onClick={handleChangeShop}>ほかの店を探す</button>
       </div>
     </main>
   );

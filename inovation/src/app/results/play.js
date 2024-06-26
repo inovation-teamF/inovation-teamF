@@ -47,7 +47,7 @@ export default function Play({ distance, angle, shop }) {
     <main className="main">
       <p className="paragraph">距離と方角からゴールを目指せ！</p>
       
-      <h1 className="distance">Remaining Distance: {distance} km</h1>
+      <h1 className="distance">Remaining Distance: {formatDistance()}</h1>
       <div className="compass-container">
         <div className="compass">
           <div id="compass-needle" className="compass-needle"></div>

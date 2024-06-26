@@ -178,7 +178,7 @@ function ResultsComponent() {
         <div>
           <Play distance={calculatedDistance} angle={bearing} shop={shop} />
         </div>
-        <button onClick={getCurrentLocation}>Update Location</button>
+        <button className={styles.button} onClick={getCurrentLocation}>Update Location</button>
       </main>
 
       <footer className={styles.footer}>
