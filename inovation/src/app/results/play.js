@@ -11,6 +11,7 @@ export default function Play({ distance, angle }) {
     window.location.href = '/result';
   };
 
+  // コンパスの針を回転させる処理
   useEffect(() => {
     const compassNeedle = document.getElementById('compass-needle');
     if (compassNeedle) {
@@ -18,15 +19,34 @@ export default function Play({ distance, angle }) {
     }
   }, [angle]);
 
+  // 距離に応じて表示と遷移を制御する処理
+  useEffect(() => {
+    if (distance !== null) {
+      const distanceInMeters = distance * 1000; // 距離をメートル単位に変換
+      if (distanceInMeters <= 20) {
+        window.location.href = '/result'; // 20m以内であれば結果ページに遷移
+      }
+    }
+  }, [distance]);
+
+  // 距離のフォーマットを切り替える関数
+  const formatDistance = () => {
+    const distanceInMeters = distance * 1000; // 距離をメートル単位に変換
+    if (distance < 1) {
+      return `${Math.round(distanceInMeters)} m`;
+    }
+    return `${distance} km`;
+  };
+
   return (
     <main className="main">
-      <h1 className="distance">Remaining Distance: {distance} km</h1>
+      <p className="paragraph">残り距離と方角だけで店にたどり着こう！</p>
+      <h1 className="distance">残り距離: {formatDistance()}</h1>
       <div className="compass-container">
         <div className="compass">
           <div id="compass-needle" className="compass-needle"></div>
         </div>
       </div>
-      <p className="paragraph">This is the content of the Play page.</p>
       <div className="buttons">
         <button className="button" onClick={handleChangeShop}>ほかの店にする</button>
         <button className="button" onClick={handleGoal}>ゴール！</button>
