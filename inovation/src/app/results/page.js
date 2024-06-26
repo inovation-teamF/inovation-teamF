@@ -1,6 +1,3 @@
-'use client';
-
-import { useSearchParams } from 'next/navigation';
 import { useState, useEffect, useCallback } from 'react';
 import Play from './play';
 import Head from 'next/head';
@@ -190,3 +187,4 @@ export default function Results() {
     </div>
   );
 }
+
