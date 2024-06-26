@@ -1,21 +1,22 @@
 /* src/app/results/results.module.css */
 .container {
   min-height: 100vh;
-  padding: 0 2rem;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #f8f9fa;
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .footer {
@@ -25,17 +26,106 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-align: center;
+  color: #343a40;
+  font-family: 'Arial', sans-serif;
+  color: #2c3e50;
 }
 
 .description {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  color: #6c757d;
 }
+
+.button {
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+  max-width: 100px;
+  font-family: 'Arial', sans-serif;
+}
+
+.button:hover {
+  background-color: #005bb5;
+}
+
+.button:active {
+  background-color: #003f7f; /* ボタンを押したときの色 */
+}
+
+.startButton {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Arial', sans-serif;
+}
+
+.startButton:hover {
+  background-color: #218838;
+}
+
+.startButton:active {
+  background-color: #1e7e34; /* ボタンを押したときの色 */
+}
+
+.compass-container {
+  margin: 2rem 0;
+}
+
+.compass {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #343a40;
+  border-radius: 50%;
+  position: relative;
+}
+
+.compass-needle {
+  width: 2px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+}
+
+.distance {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.paragraph {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 

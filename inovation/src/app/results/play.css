@@ -1,65 +1,137 @@
+/* src/app/results/play.css */
 .main {
+  padding: 2rem 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start; /* コンテンツを上部に寄せる */
-  min-height: 100vh;
-  padding: 1rem;
-  background-color: #f0f0f0;
-}
-
-.paragraph {
-  font-size: 1.25rem;
-  color: #333;
+  width: 100%;
 }
 
 .distance {
   font-size: 1.5rem;
-  color: #008000; /* 例として色を変更 */
-  margin-top: 1rem;
-  padding: 10px 20px;
-  border: 2px solid #000; /* 枠線の追加 */
-  border-radius: 5px; /* 角を丸くする */
-  background-color: #fff; /* 背景色 */
-  display: inline-block;
-  text-align: center;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  margin-bottom: 1rem;
+}
+
+.compass-container {
+  margin: 2rem 0;
+}
+
+.compass {
+  width: 200px;
+  height: 200px;
+  border: 10px solid #1e90ff;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.compass-needle {
+  width: 10px;
+  height: 50%;
+  background-color: red;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.compass-markings {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.compass-markings::before,
+.compass-markings::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 50px;
+  background-color: #343a40;
+}
+
+.compass-markings::before {
+  transform: rotate(0deg);
+}
+
+.compass-markings::after {
+  transform: rotate(90deg);
+}
+
+.north-indicator, .south-indicator, .east-indicator, .west-indicator {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.north-indicator {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.south-indicator {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.east-indicator {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.west-indicator {
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.paragraph {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2a14f4;
 }
 
 .buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 20px; /* ボタンと他のコンテンツの間にマージンを追加 */
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .button {
-  padding: 10px 20px;
-  font-size: 16px;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 0.5rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+  max-width: 100px;
+  font-family: 'Arial', sans-serif;
 }
 
-.compass-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0; /* 上下にマージンを追加 */
+.button:hover {
+  background-color: #005bb5;
 }
 
-.compass {
-  width: 300px;
-  height: 300px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: relative;
-}
-
-.compass-needle {
-  width: 2px;
-  height: 150px;
-  background-color: red;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform-origin: bottom;
-  transition: transform 0.3s ease-in-out;
+.button:active {
+  background-color: #003f7f; /* ボタンを押したときの色 */
 }
