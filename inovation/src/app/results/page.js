@@ -139,6 +139,19 @@ export default function Results() {
     }
   }, [userLocation, genre, initialDistance]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ''; // モダンブラウザのために必要
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   if (loading) {
     return <p>Loading...</p>;
   }
