@@ -205,10 +205,3 @@ export default function Results() {
     </Suspense>
   );
 }
-export default function Results() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ResultsComponent />
-    </Suspense>
-  );
-}
