@@ -172,7 +172,7 @@ export default function Results() {
         <div>
           <Play distance={calculatedDistance} angle={bearing} />
         </div>
-        <button onClick={getCurrentLocation}>Update Location</button>
+        <button className={styles.button} onClick={getCurrentLocation}>Update Location</button>
       </main>
 
       <footer className={styles.footer}>
