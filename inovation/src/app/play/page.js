@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Play from './play';
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
   const [userLocation, setUserLocation] = useState(null);
   const [selectedDistance, setSelectedDistance] = useState(1500);
 
-  const fetchRandomShop = async (location, radius, type, keyword) => {
+  const fetchRandomShop = useCallback(async (location, radius, type, keyword) => {
     try {
       const url = `/api/places?location=${location}&radius=${radius}&type=${type}&keyword=${keyword === 'random' ? '' : keyword}`;
       const res = await fetch(url);
@@ -39,9 +39,9 @@ export default function Home() {
       setError('Failed to fetch shops');
       setLoading(false);
     }
-  };
+  }, [userLocation]);
 
-  const getCurrentLocation = () => {
+  const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -58,7 +58,7 @@ export default function Home() {
       setError('Geolocation is not supported by this browser');
       setLoading(false);
     }
-  };
+  }, []);
 
   const calculateDistanceAndBearing = (userLoc, shopLoc) => {
     try {
@@ -93,14 +93,14 @@ export default function Home() {
 
   useEffect(() => {
     getCurrentLocation();
-  }, []);
+  }, [getCurrentLocation]);
 
   useEffect(() => {
     if (userLocation) {
       const location = `${userLocation.latitude},${userLocation.longitude}`;
       fetchRandomShop(location, selectedDistance, 'restaurant|cafe|bar', selectedGenre);
     }
-  }, [userLocation, selectedGenre, selectedDistance]);
+  }, [userLocation, selectedGenre, selectedDistance, fetchRandomShop]);
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
@@ -139,7 +139,7 @@ export default function Home() {
           />
         </label>
         <div>
-        <Play distance={distance} angle={bearing}/>
+          <Play distance={distance} angle={bearing}/>
         </div>
       </div>
     </div>

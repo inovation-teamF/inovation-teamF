@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Play from './play';
 import Head from 'next/head';
 import styles from './results.module.css'; // モジュールCSSとしてインポート
@@ -37,7 +37,7 @@ export default function Results() {
   const [error, setError] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
 
-  const fetchRandomShop = async (location, radius, type, keyword) => {
+  const fetchRandomShop = useCallback(async (location, radius, type, keyword) => {
     try {
       const url = `/api/places?location=${location}&radius=${radius}&type=${type}&keyword=${keyword === 'random' ? '' : keyword}`;
       const res = await fetch(url);
@@ -66,9 +66,9 @@ export default function Results() {
       setError('Failed to fetch shops');
       setLoading(false);
     }
-  };
+  }, [userLocation]);
 
-  const getCurrentLocation = () => {
+  const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
       setLoading(true);
       navigator.geolocation.getCurrentPosition(
@@ -87,7 +87,7 @@ export default function Results() {
       setError('Geolocation is not supported by this browser');
       setLoading(false);
     }
-  };
+  }, []);
 
   const calculateDistanceAndBearing = (userLoc, shopLoc) => {
     try {
@@ -122,7 +122,7 @@ export default function Results() {
 
   useEffect(() => {
     getCurrentLocation();
-  }, []);
+  }, [getCurrentLocation]);
 
   useEffect(() => {
     if (userLocation && shop) {
@@ -130,14 +130,14 @@ export default function Results() {
       setCalculatedDistance(distance);
       setBearing(bearing);
     }
-  }, [userLocation]);
+  }, [userLocation, shop]);
 
   useEffect(() => {
     if (userLocation && !shop) {
       const location = `${userLocation.latitude},${userLocation.longitude}`;
       fetchRandomShop(location, initialDistance, 'restaurant|cafe|bar', genre);
     }
-  }, [userLocation, genre, initialDistance]);
+  }, [userLocation, genre, initialDistance, fetchRandomShop]);
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
