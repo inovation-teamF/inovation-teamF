@@ -39,7 +39,7 @@ function ResultsComponent() {
 
   const fetchRandomShop = useCallback(async (location, radius, type, keyword) => {
     try {
-      const url = `/api/places?location=${location}&radius=${radius}&type=${type}&keyword=${keyword === 'random' ? '' : keyword}`;
+      const url = `/api/places?location=${location}&radius=${radius}&type=${type}&keyword=${keyword === 'random' ? '' : keyword}&opennow=true`;
       const res = await fetch(url);
       const data = await res.json();
 

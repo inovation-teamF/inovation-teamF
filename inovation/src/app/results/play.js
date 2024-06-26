@@ -28,7 +28,7 @@ export default function Play({ distance, angle, shop }) {
   useEffect(() => {
     if (distance !== null) {
       const distanceInMeters = distance * 1000; // 距離をメートル単位に変換
-      if (distanceInMeters <= 20 && shop) {
+      if (distanceInMeters <= 50 && shop) {
         router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
       }
     }
@@ -57,7 +57,11 @@ export default function Play({ distance, angle, shop }) {
           <div className="west-indicator">W</div>
         </div>
       </div>
-      
+      <a
+          href="https://compass.onl.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >webコンパス</a>
       <div className="buttons">
         <button className="button" onClick={handleChangeShop}>他の店にする</button>
         <button className="button" onClick={handleGoal}>ゴール！</button>
