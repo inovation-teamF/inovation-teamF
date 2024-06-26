@@ -20,6 +20,8 @@ export default function Play({ distance, angle }) {
 
   return (
     <main className="main">
+      <p className="paragraph">距離と方角からゴールを目指せ！</p>
+      
       <h1 className="distance">Remaining Distance: {distance} km</h1>
       <div className="compass-container">
         <div className="compass">
@@ -30,7 +32,7 @@ export default function Play({ distance, angle }) {
           <div className="west-indicator">W</div>
         </div>
       </div>
-      <p className="paragraph">This is the content of the Play page.</p>
+      
       <div className="buttons">
         <button className="button" onClick={handleChangeShop}>他の店にする</button>
         <button className="button" onClick={handleGoal}>ゴール！</button>

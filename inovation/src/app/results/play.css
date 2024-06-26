@@ -32,10 +32,10 @@
 
 .compass-needle {
   width: 10px;
-  height: 60%;
+  height: 50%;
   background-color: red;
   position: absolute;
-  top: -5%;
+  top: 0%;
   left: 50%;
   transform-origin: bottom center;
   transform: translateX(-50%);
@@ -101,8 +101,9 @@
 }
 
 .paragraph {
-  font-size: 1.2rem;
-  color: #6c757d;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2a14f4;
 }
 
 .buttons {
