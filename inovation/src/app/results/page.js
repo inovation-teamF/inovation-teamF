@@ -183,7 +183,7 @@ export default function Results() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-            Your Company
+            invation teamF
           </span>
         </a>
       </footer>
