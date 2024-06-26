@@ -1,9 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import Play from './play';
 import Head from 'next/head';
 import styles from './results.module.css'; // モジュールCSSとしてインポート
 
-export default function Results() {
+function ResultsComponent() {
   const searchParams = useSearchParams();
   const distanceParam = searchParams.get('distance');
   const genreParam = searchParams.get('genre');
@@ -188,3 +191,10 @@ export default function Results() {
   );
 }
 
+export default function Results() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultsComponent />
+    </Suspense>
+  );
+}
