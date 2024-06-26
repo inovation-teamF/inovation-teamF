@@ -24,7 +24,7 @@ export default function Play({ distance, angle }) {
     if (distance !== null) {
       const distanceInMeters = distance * 1000; // 距離をメートル単位に変換
       if (distanceInMeters <= 20) {
-        window.location.href = '/result'; // 20m以内であれば結果ページに遷移
+        router.push(`/result?shopName=${encodeURIComponent(randomShop.name)}`);
       }
     }
   }, [distance]);
