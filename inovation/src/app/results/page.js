@@ -178,7 +178,8 @@ function ResultsComponent() {
         <div>
           <Play distance={calculatedDistance} angle={bearing} shop={shop} />
         </div>
-        <button className={styles.button} onClick={getCurrentLocation}>Update Location</button>
+        <button onClick={handleGoToResult}>この店に行く</button>
+        <button onClick={getCurrentLocation}>Update Location</button>
       </main>
 
       <footer className={styles.footer}>
@@ -189,7 +190,7 @@ function ResultsComponent() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-            invation teamF
+            Your Company
           </span>
         </a>
       </footer>

@@ -1,8 +1,9 @@
 'use client';
 import './result.css';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function Result() {
+function ResultComponent() {
   const searchParams = useSearchParams();
   const shopName = searchParams.get('shopName');
 
@@ -18,5 +19,13 @@ export default function Result() {
         <button className="button" onClick={handleChangeShop}>ほかの店を探す</button>
       </div>
     </main>
+  );
+}
+
+export default function Result() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultComponent />
+    </Suspense>
   );
 }
