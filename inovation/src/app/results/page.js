@@ -1,17 +1,17 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import Play from './play';
 import Head from 'next/head';
 import styles from './results.module.css'; // モジュールCSSとしてインポート
 
 function ResultsComponent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const distanceParam = searchParams.get('distance');
   const genreParam = searchParams.get('genre');
 
-  // initialDistanceとgenreを変換するロジック
   const getDistanceValue = (param) => {
     if (param == 1) return 1500;
     if (param == 2) return 3000;
@@ -152,6 +152,12 @@ function ResultsComponent() {
     };
   }, []);
 
+  const handleGoToResult = () => {
+    if (shop) {
+      router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -170,8 +176,9 @@ function ResultsComponent() {
 
       <main className={styles.main}>
         <div>
-          <Play distance={calculatedDistance} angle={bearing} />
+          <Play distance={calculatedDistance} angle={bearing} shop={shop} />
         </div>
+        <button onClick={handleGoToResult}>この店に行く</button>
         <button onClick={getCurrentLocation}>Update Location</button>
       </main>
 
@@ -191,6 +198,13 @@ function ResultsComponent() {
   );
 }
 
+export default function Results() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultsComponent />
+    </Suspense>
+  );
+}
 export default function Results() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
