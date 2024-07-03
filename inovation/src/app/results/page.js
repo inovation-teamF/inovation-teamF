@@ -189,7 +189,7 @@ function ResultsComponent() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-            Your Company
+            inovation teamF
           </span>
         </a>
       </footer>
