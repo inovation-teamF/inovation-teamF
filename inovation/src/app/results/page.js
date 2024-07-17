@@ -228,8 +228,7 @@ function ResultsComponent() {
           </button>
           {showCoordinates && (
             <div>
-              <p>緯度: {shop.geometry.location.lat}</p>
-              <p>経度: {shop.geometry.location.lng}</p>
+              <p>{shop.geometry.location.lat},{shop.geometry.location.lng}</p>
             </div>
           )}
         </div>
