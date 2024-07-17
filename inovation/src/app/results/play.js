@@ -6,15 +6,7 @@ import { useRouter } from 'next/navigation';
 export default function Play({ distance, angle, shop }) {
   const router = useRouter();
 
-  const handleChangeShop = () => {
-    window.location.href = '/';
-  };
 
-  const handleGoal = () => {
-    if (shop) {
-      router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
-    }
-  };
 
   // コンパスの針を回転させる処理
   useEffect(() => {
@@ -47,7 +39,7 @@ export default function Play({ distance, angle, shop }) {
     <main className="main">
       <p className="paragraph">距離と方角からゴールを目指せ！</p>
       
-      <h1 className="distance">Remaining Distance: {formatDistance()}</h1>
+      <h1 className="distance">ゴールまで： {formatDistance()}</h1>
       <div className="compass-container">
         <div className="compass">
           <div id="compass-needle" className="compass-needle"></div>
@@ -57,15 +49,9 @@ export default function Play({ distance, angle, shop }) {
           <div className="west-indicator">W</div>
         </div>
       </div>
-      <a
-          href="https://compass.onl.jp/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >webコンパス</a>
-      <div className="buttons">
-        <button className="button" onClick={handleChangeShop}>他の店にする</button>
-        <button className="button" onClick={handleGoal}>ゴール！</button>
-      </div>
+      
+      
+      
     </main>
   );
 }

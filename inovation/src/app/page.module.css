@@ -249,3 +249,13 @@
     transform: rotate(0deg);
   }
 }
+
+.backgroundImage {
+  background-image: url('/public/images/NOMADEATS.png'); /* アップロードした画像のURLを使用 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 200px; /* 画像の高さを調整 */
+  margin-bottom: 20px; /* 下に空白を追加 */
+}

@@ -23,8 +23,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <div className={styles.backgroundImage}></div> {/* 新しい背景画像の要素 */}
         <h1 className={styles.title}>
-          Welcome to <a href="#">Nomad Eats!</a>
+          Welcome to <a>Nomad Eats!</a>
         </h1>
 
         <p className={styles.description}>
@@ -88,7 +89,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <a
-          href="https://yourcompany.com"
+          href="https://creator.cplaza.engg.nagoya-u.ac.jp/creative/"
           target="_blank"
           rel="noopener noreferrer"
         >

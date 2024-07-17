@@ -165,7 +165,15 @@ function ResultsComponent() {
   if (error) {
     return <p>{error}</p>;
   }
+  const handleChangeShop = () => {
+    window.location.href = '/';
+  };
 
+  const handleGoal = () => {
+    if (shop) {
+      router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
+    }
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -178,12 +186,23 @@ function ResultsComponent() {
         <div>
           <Play distance={calculatedDistance} angle={bearing} shop={shop} />
         </div>
-        <button className={styles.button} onClick={getCurrentLocation}>Update Location</button>
+        <a
+          href="https://compass.onl.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button_web"
+        >webコンパス</a>
+        <button className={styles.button} onClick={getCurrentLocation}>更新</button>
+        
+        <div className="buttons">
+        <button className="button" onClick={handleChangeShop}>他の店にする</button>
+        <button className="button" onClick={handleGoal}>ゴール！</button>
+      </div>
       </main>
 
       <footer className={styles.footer}>
         <a
-          href="https://yourcompany.com"
+          href="https://creator.cplaza.engg.nagoya-u.ac.jp/creative/"
           target="_blank"
           rel="noopener noreferrer"
         >

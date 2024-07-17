@@ -10,12 +10,12 @@
 }
 
 .distance {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
 }
 
 .compass-container {
-  margin: 2rem 0;
+  margin: 0rem 0;
 }
 
 .compass {
@@ -101,6 +101,7 @@
 }
 
 .paragraph {
+  margin-bottom: 1rem;
   font-size: 1.4rem;
   font-weight: bold;
   color: #2a14f4;
@@ -134,4 +135,19 @@
 
 .button:active {
   background-color: #003f7f; /* ボタンを押したときの色 */
+}
+
+.button_web{
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.5rem;
+  color: #000000;
+  border: none;
+  background-color: #afd4ff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+  max-width: 100px;
+  font-family: 'Arial', sans-serif;
 }
