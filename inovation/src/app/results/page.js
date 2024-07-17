@@ -36,6 +36,7 @@ function ResultsComponent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
+  const [showCoordinates, setShowCoordinates] = useState(false); // プルダウン表示の状態
 
   const fetchRandomShop = useCallback(async (location, radius, type, keyword) => {
     try {
@@ -45,9 +46,9 @@ function ResultsComponent() {
 
       if (data.length > 0) {
         const randomShop = data[Math.floor(Math.random() * data.length)];
-        console.log(`Randomly selected shop: ${randomShop.name}`); // 店の名前を出力
-        console.log(`Randomly selected shop location: ${randomShop.geometry.location.lat}, ${randomShop.geometry.location.lng}`);
-        console.log(`Current location: ${location}`);
+        console.log(`ランダムに選ばれた店: ${randomShop.name}`); // 店の名前を出力
+        console.log(`ランダムに選ばれた店の位置: ${randomShop.geometry.location.lat}, ${randomShop.geometry.location.lng}`);
+        console.log(`現在の位置: ${location}`);
         setShop(randomShop);
 
         if (userLocation && randomShop.geometry && randomShop.geometry.location) {
@@ -55,15 +56,15 @@ function ResultsComponent() {
           setCalculatedDistance(distance);
           setBearing(bearing);
         } else {
-          setError('Failed to calculate distance and bearing: Location data missing');
+          setError('距離と方位の計算に失敗しました：位置情報が不足しています');
         }
       } else {
-        setError('No shops found');
+        setError('店が見つかりませんでした');
       }
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching shops:', error);
-      setError('Failed to fetch shops');
+      console.error('店の取得エラー:', error);
+      setError('店の取得に失敗しました');
       setLoading(false);
     }
   }, [userLocation]);
@@ -78,13 +79,13 @@ function ResultsComponent() {
           setLoading(false);
         },
         (error) => {
-          console.error('Error getting current location:', error);
-          setError('Failed to get current location');
+          console.error('現在位置の取得エラー:', error);
+          setError('現在位置の取得に失敗しました');
           setLoading(false);
         }
       );
     } else {
-      setError('Geolocation is not supported by this browser');
+      setError('このブラウザではジオロケーションがサポートされていません');
       setLoading(false);
     }
   }, []);
@@ -92,12 +93,12 @@ function ResultsComponent() {
   const calculateDistanceAndBearing = (userLoc, shopLoc) => {
     try {
       if (!userLoc || !shopLoc) {
-        throw new Error('User location or shop location is undefined');
+        throw new Error('ユーザーの位置または店の位置が未定義です');
       }
       const { latitude: lat1, longitude: lon1 } = userLoc;
       const { lat: lat2, lng: lon2 } = shopLoc;
 
-      const R = 6371; // Radius of the Earth in kilometers
+      const R = 6371; // 地球の半径（キロメートル）
       const dLat = (lat2 - lat1) * Math.PI / 180;
       const dLon = (lon2 - lon1) * Math.PI / 180;
       const a =
@@ -114,8 +115,8 @@ function ResultsComponent() {
 
       return { distance: distance.toFixed(2), bearing: bearing.toFixed(2) };
     } catch (error) {
-      console.error('Error calculating distance and bearing:', error);
-      setError('Failed to calculate distance and bearing');
+      console.error('距離と方位の計算エラー:', error);
+      setError('距離と方位の計算に失敗しました');
       return { distance: null, bearing: null };
     }
   };
@@ -159,12 +160,13 @@ function ResultsComponent() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>読み込み中...</p>;
   }
 
   if (error) {
     return <p>{error}</p>;
   }
+
   const handleChangeShop = () => {
     window.location.href = '/';
   };
@@ -174,11 +176,12 @@ function ResultsComponent() {
       router.push(`/result?shopName=${encodeURIComponent(shop.name)}`);
     }
   };
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Nomad Eats - Results</title>
-        <meta name="description" content="Find the best nomad-friendly food around you" />
+        <title>Nomad Eats - 結果</title>
+        <meta name="description" content="あなたの周りのノマドに優しい食べ物を見つけましょう" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -190,14 +193,16 @@ function ResultsComponent() {
           href="https://compass.onl.jp/"
           target="_blank"
           rel="noopener noreferrer"
-          class="button_web"
-        >webコンパス</a>
+          className="button_web"
+        >
+          webコンパス
+        </a>
         <button className={styles.button} onClick={getCurrentLocation}>更新</button>
         
         <div className="buttons">
-        <button className="button" onClick={handleChangeShop}>他の店にする</button>
-        <button className="button" onClick={handleGoal}>ゴール！</button>
-      </div>
+          <button className="button" onClick={handleChangeShop}>他の店にする</button>
+          <button className="button" onClick={handleGoal}>ゴール！</button>
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -212,13 +217,30 @@ function ResultsComponent() {
           </span>
         </a>
       </footer>
+      
+      {shop && shop.geometry && shop.geometry.location && (
+        <div className={styles.coordinates}>
+          <button 
+            className={styles.toggleButton} 
+            onClick={() => setShowCoordinates(!showCoordinates)}
+          >
+            {showCoordinates ? '緯度・経度を隠す' : '緯度・経度を表示'}
+          </button>
+          {showCoordinates && (
+            <div>
+              <p>緯度: {shop.geometry.location.lat}</p>
+              <p>経度: {shop.geometry.location.lng}</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
 export default function Results() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>読み込み中...</div>}>
       <ResultsComponent />
     </Suspense>
   );
